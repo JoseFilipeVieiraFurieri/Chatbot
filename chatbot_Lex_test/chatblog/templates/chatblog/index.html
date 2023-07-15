@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=h, initial-scale=1.0">
+    <title>Document</title>
+
+ {% load static %}
+ <link rel="stylesheet" type="text/css" href="{% static 'chatblog/style.css' %}">
+
+
+ <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <h1>Chatblog</h1>
+
+    <div id="chatblog">
+        <p id="botStyle"><span>Hi there! Chatblog at your service!</span></p>
+    </div>
+
+    <div id="userInput">
+        <input type="text" id="textInput" name="userMessage" placeholder="Type your message" />
+        <input type="submit" value="Send" button="submit" id="buttonInput" />
+
+    </div>
+
+<script>
+    function getUserResponse() {
+
+        let userText = $('#textInput').val();
+        let userHTML = "<p class='userText'>User: <span>"+userText+"</span><p>"
+         $('textInput').val("");
+
+         $('#chatblog').append(userHTML);
+
+         
+         $.get('/chatbot/getResponse', {userMessage: userText}).done(function(data){
+              let message = "<p class='botText'>Chatbot: <span>" + data + "</span></p>"
+               $('#chatblog').append(message)
+         })
+    }
+
+
+    $('#buttonInput').click(function() {
+        getUserResponse();
+    })
+</script>
+
+
+
+</body>
+</html>

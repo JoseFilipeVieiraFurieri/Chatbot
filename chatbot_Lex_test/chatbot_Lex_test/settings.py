@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "chatblog.apps.ChatblogConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +39,15 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+CHATTERBOT = {
+    
+    'name': 'chatblog',
+    'storage_adapter': 'chatterbot.storage.DjangoStorageAdapter',
+    'django_app_name': 'chatblog',  # Nome do aplicativo Django que contém a definição do modelo 'Statement'
+}
+    # Outras configurações do ChatterBot, se houver
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
